@@ -1,4 +1,4 @@
-package com.example.FiltersDemo.filter;
+package com.example.FiltersDemo.filter.firstDay;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-@Component
-@Order(1)
+//@Component
+//@Order(1)
 public class AuthenticationFilter implements Filter {
 
     @Override
@@ -29,6 +29,12 @@ public class AuthenticationFilter implements Filter {
 
         if(token == null || !token.equals("1234"))  {
             httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            httpServletResponse.setContentType("application/json");
+            httpServletResponse.getWriter().write(
+                    "{\n" +
+                            "                            \"message\" : \"Invalid or missing Api Key\"\n" +
+                            "}"
+            );
             return;
         }
 

@@ -2,6 +2,7 @@ package com.example.FiltersDemo.Controller;
 
 import com.example.FiltersDemo.Service.StudentService;
 import com.example.FiltersDemo.dto.Student;
+import com.example.FiltersDemo.dto.StudentResponseDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,8 +20,8 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createStudent(@RequestBody Student student){
-        studentService.createStudent(student);
-        return ResponseEntity.ok("Done");
+    public ResponseEntity<StudentResponseDto> createStudent(@RequestBody Student student){
+        StudentResponseDto studentResponse = studentService.createStudent(student);
+        return ResponseEntity.ok(studentResponse);
     }
 }
