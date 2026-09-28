@@ -1,23 +1,23 @@
-package com.example.jdbcRelationShip.Model;
-
+package com.example.jdbcRelationShip.Model.ExtraModel;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Getter
 @Entity
 @Setter
-@Getter
 @NoArgsConstructor
-public class User {
+public class Profile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private  Long id;
 
-    private String name;
+    private String bio;
 
-    @OneToOne(mappedBy = "user")
-    private Profile profile;
+//    @OneToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
 }

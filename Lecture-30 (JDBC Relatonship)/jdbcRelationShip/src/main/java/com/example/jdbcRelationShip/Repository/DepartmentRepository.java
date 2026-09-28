@@ -20,4 +20,14 @@ public class DepartmentRepository {
     public Department getDepartmentById(Long dept_id){
         return entityManager.find(Department.class, dept_id);
     }
+
+
+    // day 2
+    public void removeDept(Department department){
+        entityManager.remove(department);
+    }
+
+    public Department findById(Long dept_id){
+        return entityManager.find(Department.class, dept_id);
+    }
 }

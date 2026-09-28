@@ -2,8 +2,10 @@ package com.example.jdbcRelationShip.Service;
 
 
 import com.example.jdbcRelationShip.Model.Department;
+import com.example.jdbcRelationShip.Model.ExtraModel.Profile;
 import com.example.jdbcRelationShip.Model.Student;
 import com.example.jdbcRelationShip.Repository.DepartmentRepository;
+import com.example.jdbcRelationShip.Repository.ProfileRepository;
 import com.example.jdbcRelationShip.Repository.StudentRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -14,11 +16,14 @@ public class StudentService {
 
     StudentRepository studentRepository;
     DepartmentRepository departmentRepository;
+    ProfileRepository profileRepository;
 
     public StudentService(StudentRepository studentRepository,
-                          DepartmentRepository departmentRepository){
+                          DepartmentRepository departmentRepository,
+                          ProfileRepository profileRepository){
         this.studentRepository = studentRepository;
         this.departmentRepository = departmentRepository;
+        this.profileRepository = profileRepository;
     }
 
     @Transactional
@@ -26,7 +31,7 @@ public class StudentService {
         Department department = departmentRepository.getDepartmentById(id);
 
         student.setDepartment(department);
-        department.getStudentList().add(student);
+//        department.getStudentList().add(student);
 
         studentRepository.save(student);
     }
@@ -37,10 +42,20 @@ public class StudentService {
         Department department = new Department();
         department.setName(deptName);
 
-        student.setDepartment(department);
-        department.getStudentList().add(student);
+        Profile profile = new Profile();
+        profile.setBio("Simple bio");
 
+        student.setDepartment(department);
+//        department.getStudentList().add(student);
+        student.setProfile(profile);
+
+
+        profileRepository.save(profile);
         departmentRepository.save(department);
         studentRepository.save(student);
+    }
+
+    public Student fetchStudentById(Long id){
+        return studentRepository.findById(id);
     }
 }

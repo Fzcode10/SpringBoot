@@ -2,6 +2,7 @@ package com.example.jdbcRelationShip.Controller;
 
 import com.example.jdbcRelationShip.Model.Department;
 import com.example.jdbcRelationShip.Service.DepartmentService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,16 @@ public class DepartmentController {
         System.out.println(studentName+" controller 2");
         departmentService.createDepartment(department, studentName);
         return ResponseEntity.ok("Done");
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteDepartment(@PathVariable Long id) {
+        boolean isDeleted = departmentService.removeDepartment(id);
+        if (!isDeleted) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Department not found with ID: " + id);
+        }
+        return ResponseEntity.ok("Department deleted successfully");
     }
 
 }

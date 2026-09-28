@@ -1,10 +1,15 @@
 package com.example.jdbcRelationShip.Model;
 
+import com.example.jdbcRelationShip.Model.ExtraModel.Profile;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.context.annotation.Lazy;
+
+
+import java.util.List;
 
 
 @Getter
@@ -21,7 +26,7 @@ public class Student {
 
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name="dept_id",
             nullable = false
@@ -37,5 +42,10 @@ public class Student {
 //        this.department = null;
 //        this.department.remove(this);
 //    }
+
+    // Day 2
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
 
 }

@@ -12,7 +12,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
+
 @Entity(name = "Dept")
 public class Department {
 
@@ -22,6 +23,9 @@ public class Department {
 
     private String name;
 
-    @OneToMany(mappedBy = "department")
-    private List<Student> studentList = new ArrayList<>();
+//    @OneToMany(
+//            mappedBy = "department",
+//            cascade = CascadeType.ALL
+//    )
+//    private List<Student> studentList = new ArrayList<>();
 }
