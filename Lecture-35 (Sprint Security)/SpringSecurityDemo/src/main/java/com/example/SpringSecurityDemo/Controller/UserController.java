@@ -6,6 +6,7 @@ import com.example.SpringSecurityDemo.Entity.User;
 import com.example.SpringSecurityDemo.Service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,8 @@ public class UserController {
     }
 
     @GetMapping("/hello")
-    public String sayHello(){
+    public String sayHello(Authentication authentication){
+        System.out.println("You are logged with :"+authentication);
         return "Hello";
     }
 
